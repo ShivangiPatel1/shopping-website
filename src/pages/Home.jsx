@@ -1,6 +1,7 @@
 import React from 'react'
 import Categories from '../Components/Categories'
-
+import Navbar from "../Components/Navbar"
+import Footer from "../Components/Footer"
 
 const Home = () => {
   return (
