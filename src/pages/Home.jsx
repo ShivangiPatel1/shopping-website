@@ -1,9 +1,10 @@
 import React from 'react'
+import Categories from '../Components/Categories'
 
 
 const Home = () => {
   return (
-    <div>Hello World!</div>
+    <div><Categories></Categories></div>
   )
 }
 
