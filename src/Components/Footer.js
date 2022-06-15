@@ -1,13 +1,12 @@
-import styledEngine from "@mui/styled-engine";
 import React from "react";
 import styled from "styled-components";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import RoomIcon from '@mui/icons-material/Room';
-import PhoneIcon from '@mui/icons-material/Phone';
-import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+import RoomIcon from "@mui/icons-material/Room";
+import PhoneIcon from "@mui/icons-material/Phone";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +38,7 @@ const SocialIcon = styled.div`
 `;
 const Center = styled.div`
   flex: 1;
-  padding:20px ;
+  padding: 20px;
 `;
 const Title = styled.h3`
   margin-bottom: 30px;
@@ -59,7 +58,7 @@ const ListItem = styled.li`
 
 const Right = styled.div`
   flex: 1;
-  padding:20px ;
+  padding: 20px;
 `;
 
 const ContactItem = styled.div`
@@ -68,7 +67,7 @@ const ContactItem = styled.div`
   align-items: center;
 `;
 const Payment = styled.img`
-    width: 50%;
+  width: 50%;
 `;
 
 const Footer = () => {
@@ -97,7 +96,7 @@ const Footer = () => {
         </SocialContainer>
       </Left>
       <Center>
-      <Title>Useful Links</Title>
+        <Title>Useful Links</Title>
         <List>
           <ListItem>Home</ListItem>
           <ListItem>Cart</ListItem>
@@ -112,15 +111,17 @@ const Footer = () => {
         </List>
       </Center>
       <Right>
-          <Title>Contact</Title>
-          <ContactItem>
-          <RoomIcon style={{marginRight:"10px"}}/> 100 W 49th Ave, Vancouver, BC V5Y 2Z6
+        <Title>Contact</Title>
+        <ContactItem>
+          <RoomIcon style={{ marginRight: "10px" }} /> 100 W 49th Ave,
+          Vancouver, BC V5Y 2Z6
         </ContactItem>
         <ContactItem>
-          <PhoneIcon style={{marginRight:"10px"}}/> +1 987 654 3210
+          <PhoneIcon style={{ marginRight: "10px" }} /> +1 987 654 3210
         </ContactItem>
         <ContactItem>
-          <MailOutlineOutlinedIcon style={{marginRight:"10px"}} /> project@cpsc2650.ca
+          <MailOutlineOutlinedIcon style={{ marginRight: "10px" }} />{" "}
+          project@cpsc2650.ca
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>
