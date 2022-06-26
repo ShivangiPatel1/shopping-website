@@ -9,7 +9,7 @@ const Container = styled.div`
     width:100%;
     height:100vh;
     display: flex;
-    background-color: grey;
+    background-color: #dfd2eb;
     position: relative;
     overflow: hidden;
 `
@@ -63,18 +63,23 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
     font-size: 70px;
+    color:#E64398;
 `
 const Desc = styled.p`
     margin: 50px 0px;
     font-size: 20px;
     font-weight: 500;
     letter-spacing: 3px;
+    color: #B39B;  
+    font-weight : bold;
 `
 const Button = styled.button`
     padding: 10px;
     font-size: 20px;
     background-color: transparent;
     cursor: pointer;
+    /* color:#E64398; */
+    border-color: black ;
 `
 
 
