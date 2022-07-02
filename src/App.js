@@ -5,9 +5,9 @@ import SingleProduct from './pages/SingleProduct';
 
 function App() {
   return (
-    //  <Home/>
-    //  <AllProduct/>
-    <SingleProduct/>
+    <Home/>
+    // <AllProduct/>
+    //<SingleProduct/>
   );
 }
 
