@@ -56,6 +56,7 @@ const Image = styled.img`
     height: 80%;
     position: relative;
     left:100px;
+
 `
 
 const InfoContainer = styled.div`
