@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 const Container = styled.div`
+
     width: 100vw;
     height: 100vh;
     background-color: #edc601;
@@ -41,6 +42,7 @@ const Link = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+
 `
 
 const Login = () => {
@@ -52,8 +54,13 @@ const Login = () => {
                 <Input placeholder="User name"/>
                 <Input placeholder="Password"/>
                 <Button>Login</Button>
+
                 <Link>Forget Password</Link>
                 <Link>Create a new Account</Link>
+
+                <link>Forget Password</link>
+                <link>Create a new Account</link>
+
             </Form>
         </Wrapper>
     </Container>
