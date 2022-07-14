@@ -66,7 +66,7 @@ router.get("/find/:userId",verifyTokenAndAuthorization, async (req,res) =>{
 
 
 //Get All Carts(only admin can reach this data)
-router.get("/", verifyTokenAndAdmin, (req,res)=>{
+router.get("/", verifyTokenAndAdmin, async(req,res)=>{
 
     try{
         const Carts = await Cart.find();
