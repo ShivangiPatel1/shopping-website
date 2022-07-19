@@ -7,7 +7,6 @@ const {
 
 const router = require("express").Router();
 
-
 //Create
 
 router.post("/", verifyToken, async(req,res)=>{

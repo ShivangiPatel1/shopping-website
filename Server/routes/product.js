@@ -28,8 +28,8 @@ router.put("/:id",verifyTokenAndAdmin, async (req,res)=>{
         const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
         {
-          $set:req.body
-        },{new:true})
+          $set:req.body,
+        },{new:true});
 
         res.status(200).json(updatedProduct);
 
@@ -71,24 +71,25 @@ router.get("/", async (req,res) =>{
   // new is the name of the query
   // by this we can write any query we want
   const qNew = req.query.new;
-  const qCategory = req.query.new;
+  const qCategory = req.query.category;
 
   try{
 
       let products;
 
       if(qNew){
+        products = await Product.find().sort({createdAt:-1}).limit(1)
+      } else if (qCategory){
         products = await Product.find({
-            categories: {
-                $in :[qCategory],
+            categories:{
+                $in:[qCategory],
             },
         });
-      }else{
-        products = await Product.find();
+      }else {
+        products = await Product.find()
       }
 
-
-      res.status(200).json(users);
+      res.status(200).json(products);
 
   }catch(err){
       res.status(500).json(err);
