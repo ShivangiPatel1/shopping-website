@@ -5,12 +5,7 @@ import Navbar from "../Components/Navbar"
 import DealRibbon from '../Components/DealRibbon'
 import NewsLetter from '../Components/NewsLetter'
 import Footer from '../Components/Footer'
-<<<<<<< HEAD
-=======
 import { mobile } from '../responsive'
-
-
->>>>>>> main
 import ProductsSection from '../Components/ProductsSection'
 const Container = styled.div``;
 
