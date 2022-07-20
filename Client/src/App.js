@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login"
 import Cart from "./pages/Cart";
 
+
 function App() {
   const user = true;
   return (
@@ -18,8 +19,8 @@ function App() {
       <Route path="/register" element={user ? <Navigate replace to="/"/>:<Register />}></Route>
       <Route path="/login" element={user ? <Navigate replace to="/"/> :<Login />}></Route>
     </Routes>
-
   );
+
 }
 
 export default App;
