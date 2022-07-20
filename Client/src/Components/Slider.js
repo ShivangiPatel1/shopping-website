@@ -3,6 +3,7 @@ import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { useState } from "react";
 import { sliderItems } from "../data";
+import { mobile } from "../responsive";
 
 
 const Container = styled.div`
@@ -12,6 +13,7 @@ const Container = styled.div`
     background-color: #dfd2eb;
     position: relative;
     overflow: hidden;
+    ${mobile({display:"none"})}
 `
 
 const Arrow = styled.div`
