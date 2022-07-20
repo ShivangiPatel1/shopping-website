@@ -1,12 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
+import {useLocation} from "react-router-dom"
 import styled from "styled-components"
 import Navbar from "../Components/Navbar"
 import DealRibbon from '../Components/DealRibbon'
 import NewsLetter from '../Components/NewsLetter'
 import Footer from '../Components/Footer'
 import { mobile } from '../responsive'
-
-
 import ProductsSection from '../Components/ProductsSection'
 const Container = styled.div``;
 
@@ -39,6 +38,18 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const AllProduct = () => {
+  const location = useLocation();
+  const [filters,setFilters]=useState({})
+  const [sort,setSort]=useState({})
+  let cat = location.pathname.split("/")[2]
+  const handleFilter =(e)=>{
+    const value = e.target.value;
+    setFilters({
+      ...filters,
+     [e.target.name]:value 
+    })
+  }
+  
   return (
     <Container>
     <Navbar />
@@ -47,7 +58,7 @@ const AllProduct = () => {
     <FilterContainer>
       <Filter>
         <FilterText>Filter Products:</FilterText>
-        <Select>
+        <Select name={"color"} onChange={(e)=>handleFilter(e)}>
           <Option disabled selected>
             Color
           </Option>
@@ -58,7 +69,7 @@ const AllProduct = () => {
           <Option>Yellow</Option>
           <Option>Green</Option>
         </Select>
-        <Select>
+        <Select name={"size"} onChange={(e)=>handleFilter(e)}>
           <Option disabled selected>
             Size
           </Option>
@@ -71,14 +82,14 @@ const AllProduct = () => {
       </Filter>
       <Filter>
         <FilterText>Sort Products:</FilterText>
-        <Select>
-          <Option selected>Newest</Option>
-          <Option>Price (asc)</Option>
-          <Option>Price (desc)</Option>
+        <Select onChange={(e)=>setSort(e.target.value)}>
+          <Option value="newest">Newest</Option>
+          <Option value="asc">Price (asc)</Option>
+          <Option value="desc">Price (desc)</Option>
         </Select>
       </Filter>
     </FilterContainer>
-    <ProductsSection />
+    <ProductsSection cat={cat} filters={filters} sort={sort}/>
     <NewsLetter />
     <Footer />
   </Container>
