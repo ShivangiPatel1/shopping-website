@@ -1,6 +1,7 @@
 
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 // import Announcement from "../Components/Announcement";
 import Footer from "../Components/Footer";
@@ -153,6 +154,9 @@ const Button =  styled.button`
 
 
 const Cart = () => {
+
+  const cart = useSelector(state=>state.cart);
+
   return (
     <Container>
         <Navbar/>
@@ -170,53 +174,39 @@ const Cart = () => {
             <Bottom>
                 <Info>
 
-                <Product>
-                        <ProductDetail>
-                            <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"/>
-                            <Details>
-                                <ProductName><b>Product: </b> Jeans</ProductName>
-                                <ProductID><b>ID: </b> 8373634323</ProductID>
-                                <ProductColor color="black"/>
-                                <ProductSize><b>Size: </b> 39</ProductSize>
-                            </Details>
-                        </ProductDetail>
-                        <PriceDetail>
-                            <ProductAmountContainer>
-                                <Add/>
-                                <ProductAmount>2</ProductAmount>
-                                <Remove/>
-                            </ProductAmountContainer>
-                            <ProductPrice>$30</ProductPrice>
-                        </PriceDetail>
-                    </Product>
-
-                    <Hr/>
+                    {cart.products.map(product=>(
 
                     <Product>
                         <ProductDetail>
-                            <Image src="https://i.ibb.co/S6qMxwr/jean.jpg"/>
+                            <Image src={product.img}/>
                             <Details>
-                                <ProductName><b>Product: </b> Mom Style</ProductName>
-                                <ProductID><b>ID: </b> 123456789</ProductID>
-                                <ProductColor color="blue"/>
-                                <ProductSize><b>Size: </b> 20</ProductSize>
+                                <ProductName><b>Product: </b> {product.title}</ProductName>
+                                <ProductID><b>ID: </b> {product._id}</ProductID>
+                                <ProductColor color={product.color}/>
+                                <ProductSize><b>Size: </b> {product.size}</ProductSize>
                             </Details>
                         </ProductDetail>
                         <PriceDetail>
                             <ProductAmountContainer>
                                 <Add/>
-                                <ProductAmount>5</ProductAmount>
+                                <ProductAmount>{product.quantity}</ProductAmount>
                                 <Remove/>
                             </ProductAmountContainer>
-                            <ProductPrice>$10</ProductPrice>
+                            <ProductPrice>{product.price*product.quantity}</ProductPrice>
                         </PriceDetail>
                     </Product>
+
+                    ))};
+                    <Hr/>
+
+
+
                 </Info>
                 <Summary>
                     <SummaryTitle>Order Summary</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$ 50</SummaryItemPrice>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                     </SummaryItem>
 
                     <SummaryItem>
@@ -231,7 +221,7 @@ const Cart = () => {
 
                     <SummaryItem type="total">
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$ 50</SummaryItemPrice>
+                        <SummaryItemPrice>${cart.total}</SummaryItemPrice>
                     </SummaryItem>
 
                     <Button>Checkout Now</Button>
@@ -240,7 +230,7 @@ const Cart = () => {
         </Wrapper>
         <Footer/>
     </Container>
-  )
-}
+  );
+};
 
 export default Cart

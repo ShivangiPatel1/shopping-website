@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
+import { Route, Link, Routes , Navigate} from "react-router-dom";
+
 
 const Circle = styled.div`
   border-radius: 50%;
@@ -71,7 +73,9 @@ const ProductCards = ({ item }) => {
           <AddShoppingCartIcon />
         </Icon>
         <Icon>
+          <Link to={`/product/${item._id}`}>
           <SearchIcon />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderIcon />

@@ -9,6 +9,7 @@ import { mobile } from '../responsive'
 import ProductsSection from '../Components/ProductsSection'
 const Container = styled.div``;
 
+
 const Title = styled.h1`
   margin: 20px;
 `;
@@ -54,7 +55,7 @@ const AllProduct = () => {
     <Container>
     <Navbar />
    <DealRibbon/>
-    <Title>Dresses</Title>
+    <Title>{cat}</Title>
     <FilterContainer>
       <Filter>
         <FilterText>Filter Products:</FilterText>
