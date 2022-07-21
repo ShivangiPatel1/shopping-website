@@ -8,7 +8,7 @@ import Cart from "./pages/Cart";
 
 
 function App() {
-  const user = true;
+  const user = false;
   return (
    
     <Routes>
