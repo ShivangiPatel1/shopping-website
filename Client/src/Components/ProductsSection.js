@@ -54,8 +54,7 @@ const ProductsSection = ({ cat, filters, sort }) => {
       );    
     }
 
-
-  },[products,filters])
+  },[sort])
 
   return (
     <Container>
