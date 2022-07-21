@@ -1,5 +1,5 @@
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import DealRibbon from "../Components/DealRibbon";
 import Navbar from "../Components/Navbar";
@@ -8,6 +8,11 @@ import Footer from "../Components/Footer";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from "../responsive";
+import {useLocation} from "react-router-dom";
+import { publicRequest } from "../requestMethods";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
+
 
 const Wrapper = styled.div`
   padding: 50px;
@@ -119,49 +124,76 @@ const Button = styled.button`
 `;
 
 const SingleProduct = () => {
+
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product,setProduct] = useState({});
+  const [quantity,setQuantity] = useState(1);
+  const [color,setColor] = useState("");
+  const [size,setSize] = useState("");
+  const dispatch = useDispatch();
+
+
+
+  useEffect(()=>{
+    const getProduct = async ()=>{
+      try{
+        const res = await publicRequest.get("/products/find/" + id);
+        setProduct(res.data);
+      }catch{}
+    };
+    getProduct();
+  },[id])
+
+  const handleQuantity = (type) =>{
+    if(type==="des"){
+      quantity>1 && setQuantity(quantity-1);
+    }else{
+      setQuantity(quantity+1);
+    }
+  }
+
+  const handleClick = ()=>{
+    //update cart
+    dispatch(addProduct({...product,quantity,color,size}));
+
+  };
+
   return (
     <Container>
       <Navbar />
       <DealRibbon />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>$ 20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {product.color.map((c)=>{
+                <FilterColor color={c} key={c} onClick={()=>setColor(c)}/>
+              })}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+              <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                {product.size.map((s)=>(
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <RemoveIcon />
-              <Amount>1</Amount>
-              <AddIcon />
+              <RemoveIcon onClick={()=>handleQuantity("dec")} />
+              <Amount>{quantity}</Amount>
+              <AddIcon onClick={()=>handleQuantity("inc")}/>
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

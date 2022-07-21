@@ -28,11 +28,42 @@ const ProductsSection = ({ cat, filters, sort }) => {
       }
     };
     getProducts();
-  }, []);
+  }, [cat]);
+
+  useEffect(()=>{
+    cat && setFilteredProducts(
+      products.filter(item=>Object.entries(filters).every(([key,value])=>
+        item[key].includes(value)
+      ))
+    )
+  },[products,filters])
+
+
+  useEffect(()=>{
+    if(sort ==="newest"){
+      setFilteredProducts(prev=>
+          [...prev].sort((a,b)=> a.createdAt - b.createdAt)
+      );
+    }else if(sort ==="asc"){
+      setFilteredProducts(prev=>
+        [...prev].sort((a,b)=> a.price - b.price)
+      );
+    }else{
+      setFilteredProducts(prev=>
+        [...prev].sort((a,b)=> b.price - a.price)
+      );    
+    }
+
+
+  },[products,filters])
 
   return (
     <Container>
-      {popularProducts.map((item) => (
+      {cat ? filteredProducts.map((item) => (
+        <ProductCards item={item} key={item.id}></ProductCards>
+      )) : products
+           .slice(0,8)
+           .map((item) => (
         <ProductCards item={item} key={item.id}></ProductCards>
       ))}
     </Container>
