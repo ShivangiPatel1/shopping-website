@@ -7,7 +7,9 @@ const AuthRoute= require("./routes/auth")
 const productRoute= require("./routes/product")
 const cartRoute= require("./routes/cart")
 const orderRoute= require("./routes/order")
+const paymentRoute = require("./routes/payment")
 dotenv.config();
+const bodyparser = require('body-parser')
 mongoose
   .connect(process.env.MONGO_URL) 
   .then(() => console.log("Database Connected"))
@@ -32,15 +34,17 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.json())
 app.use(express.json())
 app.use("/api/auth",AuthRoute);
 app.use("/api/users",UserRoute);
 app.use("/api/products",productRoute);
 app.use("/api/carts",cartRoute);
 app.use("/api/orders",orderRoute);
+app.use("/api/checkout",paymentRoute);
 
 
 app.listen(process.env.PORT||8080, () => {
   console.log("Backend Server is running");
 });
-app.use("/api/user",UserRoute)
