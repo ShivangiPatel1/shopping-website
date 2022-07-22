@@ -76,6 +76,7 @@ router.post("/payment", async (req, res) => {
   } catch (error) {
     error = error;
     status = 500;
+    console.log(error)
     client.messages.create({
       body: `Your payment failed try again`,
       from: '+18576756986',
