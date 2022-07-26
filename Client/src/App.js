@@ -5,6 +5,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Register from "./pages/Register";
 import Login from "./pages/Login"
 import Cart from "./pages/Cart";
+import Support from "./pages/Support"
 import { useSelector } from "react-redux";
 
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/cart" element={<Cart />}></Route>
       <Route path="/register" element={user ? <Navigate replace to="/"/>:<Register />}></Route>
       <Route path="/login" element={user ? <Navigate replace to="/"/> :<Login />}></Route>
+      <Route path="/support" element={<Support/>}></Route>
     </Routes>
   );
 
