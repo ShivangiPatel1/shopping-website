@@ -160,7 +160,7 @@ const Button =  styled.button`
 const Cart = () => {
 
   const cart = useSelector(state=>state.cart);
-  const history = useNavigate()
+  
   const [stripeToken, setStripeToken] = useState(null);
   const onToken = (token) => {
     setStripeToken(token);
@@ -171,7 +171,7 @@ const Cart = () => {
       try {
         const res = await userRequest.post("/checkout/payment", {stripeToken,cart      
         });
-        history.push("/success",{data:res.data})
+      
         alert("Your payment was successful");
       } catch (e) {
         console.log(e)
@@ -179,7 +179,7 @@ const Cart = () => {
       }
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total,history]);
+  }, [stripeToken, cart.total]);
   return (
     <Container>
         <Navbar/>
