@@ -9,7 +9,7 @@ const { Search } = Input;
 const { Text } = Typography;
 const { Meta } = Card;
 function Support() {
-  const userName = useSelector(state=>state.user);
+  const {currentUser} = useSelector(state=>state.user);
   const [messages, setMessages] = useState([]);
   const [SearchValue, setSearchValue] = useState("");
 
@@ -18,7 +18,7 @@ function Support() {
       JSON.stringify({
         type: "message",
         msg: value,
-        user: userName,
+        user: currentUser.username,
       })
     );
     setSearchValue("");
@@ -66,7 +66,7 @@ function Support() {
                   width: 300,
                   margin: "16px 4px 0 4px",
                   alignSelf:
-                    userName === message.user ? "flex-end" : "flex-start",
+                    currentUser.username === message.user ? "flex-end" : "flex-start",
                 }}
                 loading={false}
               >
