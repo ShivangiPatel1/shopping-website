@@ -1,4 +1,5 @@
 
+import {useState,useEffect} from "react"
 import Add from "@mui/icons-material/Add";
 import Remove from "@mui/icons-material/Remove";
 import { useSelector } from "react-redux";
@@ -7,6 +8,9 @@ import styled from "styled-components";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { mobile } from "../responsive";
+import StripeCheckout from "react-stripe-checkout";
+import {userRequest} from "../requestMethods";
+import { useNavigate } from "react-router";
 
 const Container =  styled.div``
 
@@ -156,7 +160,26 @@ const Button =  styled.button`
 const Cart = () => {
 
   const cart = useSelector(state=>state.cart);
-
+  
+  const [stripeToken, setStripeToken] = useState(null);
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+ 
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {stripeToken,cart      
+        });
+      
+        alert("Your payment was successful");
+      } catch (e) {
+        console.log(e)
+        alert("Your payment was successful");
+      }
+    };
+    stripeToken && makeRequest();
+  }, [stripeToken, cart.total]);
   return (
     <Container>
         <Navbar/>
@@ -223,14 +246,24 @@ const Cart = () => {
                         <SummaryItemText>Total</SummaryItemText>
                         <SummaryItemPrice>${cart.total}</SummaryItemPrice>
                     </SummaryItem>
-
+                    <StripeCheckout
+              name="Shopper Stop"
+              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey='pk_test_51L70gLF3AsAVwd7LgupCpPY7HqcmDW1zLWPADsZ645xxJLbM1qwcKvyED7xczDnU2mRl0W15DOnknGlcc9brV2P500NA32426N'
+            >
                     <Button>Checkout Now</Button>
+                    </StripeCheckout>
                 </Summary>
             </Bottom>
         </Wrapper>
         <Footer/>
     </Container>
   );
-};
+}
 
 export default Cart
