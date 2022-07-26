@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
       },
       process.env.JWT_SEC,
       {
-        expiresIn: "3d",
+        expiresIn: "3m",
       }
     );
     const EnteredPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
