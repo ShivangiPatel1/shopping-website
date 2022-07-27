@@ -68,7 +68,7 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
-
+  const user = useSelector((state)=>state.user.currentUser);
   return (
     <Wrapper>
       <Left>
@@ -82,13 +82,16 @@ const Navbar = () => {
         <Logo>SHOPPERS STOP</Logo>
       </Center>
       <Right>
-        <Link to="/register">
+        {user ? (<MenuItem>Hi  {user.username}</MenuItem>):(<Link to="/register">
           <MenuItem>REGISTER</MenuItem>
-        </Link>
-        <Link to="/login">
+        </Link>)}
+        {user ? (<Link to="/support">
+          {" "}
+          <MenuItem>Support</MenuItem>
+        </Link>) : (<Link to="/login">
           {" "}
           <MenuItem>SIGN IN</MenuItem>
-        </Link>
+        </Link>)}
 
         <Link to="/cart">
           <MenuItem>
