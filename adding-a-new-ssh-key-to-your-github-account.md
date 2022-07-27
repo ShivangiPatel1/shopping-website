@@ -1,0 +1,1 @@
+[![Licensed](https://github.com/actions/first-interaction/actions/workflows/licensed.yml/badge.svg?branch=TingluoHuang-patch-1&event=create)](https://github.com/actions/first-interaction/actions/workflows/licensed.yml)
