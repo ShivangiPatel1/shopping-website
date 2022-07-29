@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/api/"
+const BASE_URL = "https://cpsc2650project.herokuapp.com/api/"
 const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDhjYzg0YTU0MGMyYmM1ZTI0OGQ1MiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTgzNzUzNzAsImV4cCI6MTY1ODYzNDU3MH0.CbJEFrmlrYaczUUvBRoOaBoOJuLCIsgeMcUSd9kuqUk"
 
 

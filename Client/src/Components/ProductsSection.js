@@ -19,8 +19,8 @@ const ProductsSection = ({ cat, filters, sort }) => {
       try {
         const res = await axios.get(
           cat
-            ? `http://localhost:8080/api/products?category=${cat}`
-            : "http://localhost:8080/api/products"
+            ? `https://cpsc2650project.herokuapp.com/api/products?category=${cat}`
+            : "https://cpsc2650project.herokuapp.com/api/products"
         );
       setProducts(res.data)
       } catch (e) {
