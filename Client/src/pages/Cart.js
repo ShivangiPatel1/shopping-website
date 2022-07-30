@@ -10,7 +10,7 @@ import Navbar from "../Components/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import {userRequest} from "../requestMethods";
-import { useNavigate } from "react-router";
+
 
 const Container =  styled.div``
 

@@ -79,14 +79,14 @@ const Desc = styled.p`
     color: #B39B;  
     font-weight : bold;
 `
-const Button = styled.button`
-    padding: 10px;
-    font-size: 20px;
-    background-color: transparent;
-    cursor: pointer;
-    /* color:#E64398; */
-    border-color: black ;
-`
+// const Button = styled.button`
+//     padding: 10px;
+//     font-size: 20px;
+//     background-color: transparent;
+//     cursor: pointer;
+//     /* color:#E64398; */
+//     border-color: black ;
+// `
 
 
 const Slider = () => {
