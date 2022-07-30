@@ -1,21 +1,21 @@
 export const categories = [
     {
       id: 1,
-      img: "https://images.pexels.com/photos/5886041/pexels-photo-5886041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      title: "SHIRT STYLE!",
+      img: "https://cdn.shopify.com/s/files/1/1981/3263/products/053264949108-01-0_1024x1024@2x.jpg?v=1654550983",
+      title: "WOMEN",
       cat:"women"
     },
     {
       id: 2,
-      img: "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      title: "LOUNGEWEAR LOVE",
+      img: "https://cdn.shopify.com/s/files/1/1981/3263/products/062451768174-01-0_1024x1024@2x.jpg?v=1649254170",
+      title: "MEN",
       cat:"men"
     },
     {
       id: 3,
-      img: "https://images.pexels.com/photos/5480696/pexels-photo-5480696.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      title: "LIGHT JACKETS",
-      cat:"coats"
+      img: "https://cdn.shopify.com/s/files/1/1981/3263/files/Slice_93_8a04e762-29eb-4583-ad98-9848a797deb9_300x.jpg?v=1649339520",
+      title: "ACCESORIES",
+      cat:"accessories"
     },
   ];
   export const popularProducts = [
@@ -60,23 +60,23 @@ export const categories = [
 export const sliderItems = [
     {
         id:1,
-        img:"https://i.ibb.co/DG69bQ4/5.png",
+        img:"https://cdn.shopify.com/s/files/1/1981/3263/products/053164599125_01_0_1024x1024@2x.jpg?v=1654864642",
         title:"Summer Sale",
-        desc: "Summer test",
+        desc: "Check out new collection of Jumpsuits. Best for summer",
         bg:"f5fafd"
     },
     {
         id:2,
-        img:"https://i.ibb.co/DG69bQ4/2.png",
-        title:"Winter Sale",
-        desc: "Winter test",
+        img:"https://cdn.shopify.com/s/files/1/1981/3263/products/060365018477-10-0_1024x1024@2x.jpg?v=1649268416",
+        title:"Prints For Men",
+        desc: "Check out printed shirts for men",
         bg:"fcf1ed"
     },
     {
         id:3,
-        img:"https://i.ibb.co/DG69bQ4/2.png",
-        title:"Clearance Sale",
-        desc: "Clearance test",
+        img:"https://cdn.shopify.com/s/files/1/1981/3263/products/057164918819-91-1_1024x1024@2x.jpg?v=1652363858",
+        title:"New Jwellery Collection",
+        desc: "New Jwellery collection , best for parties.",
         bg:"f5fafd"
     }
 ]

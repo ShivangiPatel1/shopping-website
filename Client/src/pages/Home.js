@@ -13,9 +13,9 @@ const Home = () => {
     <div>
       <Navbar></Navbar>
       <DealRibbon/>
-      <Slider/>
       <Categories></Categories>
       {user ? <ProductsSection/> :null}
+      <Slider/>
       <NewsLetter></NewsLetter>
       <Footer></Footer>
     </div>

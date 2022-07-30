@@ -1,0 +1,975 @@
+{
+	"info": {
+		"_postman_id": "c61500c1-f39e-4816-936f-9433deb725c0",
+		"name": "ShoppingWebsite DepyoedURL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18592255"
+	},
+	"item": [
+		{
+			"name": "User Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 500ms for register api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"I am testing response type for register api\",function(){\r",
+							"    pm.response.to.be.json\r",
+							"})\r",
+							"let jsonData = pm.response.json();\r",
+							"pm.test(\"Response body for register should be an object\", function() {\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Abc\",\r\n    \"email\":\"Abc@gmail.com\",\r\n    \"password\":\"Abc@2020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/auth/register/",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let jsonData = pm.response.json()\r",
+							"console.log(jsonData.accessToken)\r",
+							"pm.globals.set(\"Token\", \"Bearer \"+ jsonData.accessToken);\r",
+							"pm.globals.set(\"id\", jsonData._id);\r",
+							"pm.test(\"Response time is less than 500ms for login api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"I am testing response type for login api\",function(){\r",
+							"    pm.response.to.be.json\r",
+							"})\r",
+							"pm.test(\"Response body for login should be an object\", function() {\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Abc\",\r\n    \"password\":\"Abc@2020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/auth/login/",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403 , Forbidden for not being Admin\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData)\r",
+							"pm.test(\"You are not Admin test\",function(){\r",
+							"     pm.expect(jsonData).to.eql(\"You are not alowed to do that!\")\r",
+							" })\r",
+							"pm.globals.get(\"Token\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users?new=true",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "new",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 500ms for register api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"I am testing response type for register api\",function(){\r",
+							"    pm.response.to.be.json\r",
+							"})\r",
+							"let jsonData = pm.response.json();\r",
+							"pm.test(\"Response body for update user should be an object\", function() {\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"isAdmin\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login as Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 , Successful login as Admin\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let jsonData = pm.response.json()\r",
+							"console.log(jsonData.accessToken)\r",
+							"pm.globals.set(\"Token\", \"Bearer \"+ jsonData.accessToken);\r",
+							"pm.globals.set(\"id\", jsonData._id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Abc\",\r\n    \"password\":\"Abc@2020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/auth/login/",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401 for unauthorized login\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"let jsonData = pm.response.json();\r",
+							"console.log(jsonData)\r",
+							"pm.test(\"Authentication test\",function(){\r",
+							"     pm.expect(jsonData).to.eql(\"You are not authenticated!\")\r",
+							" })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users?new=true",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "new",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const Token = pm.globals.get(\"Token\");\r",
+							"pm.test(\"Response time is less than 500ms for User api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"I am testing response type for User api\",function(){\r",
+							"    pm.response.to.be.json\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Stats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for User statistics api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"let jsonData = pm.response.json()\r",
+							"console.log(jsonData)\r",
+							"\r",
+							" pm.globals.set(\"Prdct_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ADIDAS X DISNEY RACER TR21 SHOES\",\r\n    \"desc\": \"CARTOON-INSPIRED SNEAKERS MADE IN PART WITH RECYCLED MATERIALS\",\r\n    \"img\": \"https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ed1b74e4179848b88508ae6f01841fed_9366/adidas_x_Disney_Racer_TR21_Shoes_Blue_GY6644_01_standard.jpg\",\r\n    \"categories\": [\"shoes\",\"kids\"],\r\n    \"size\":\"S\",\r\n    \"color\": \"red\",\r\n    \"price\": \"30.20\"\r\n    }\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/products",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 500ms for products api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"I am testing response type for products api\",function(){\r",
+							"    pm.response.to.be.json\r",
+							"})\r",
+							"let jsonData = pm.response.json();\r",
+							"pm.test(\"Response body for update product should be an object\", function() {\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n     \"title\": \"ADDIDAS ABC\"\r\n     \r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/products/{{Prdct_id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"{{Prdct_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for product api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDZkZTAwZjY5ZGI4NDM5OWM3YTZmNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1ODI1MDk5MSwiZXhwIjoxNjU4NTEwMTkxfQ.r4HL-SYsOwvqLaNEW3gNKiHlaeg6VffXrb_7qLLN2G8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/products",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for product api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZDZkZTAwZjY5ZGI4NDM5OWM3YTZmNCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1ODI1MDk5MSwiZXhwIjoxNjU4NTEwMTkxfQ.r4HL-SYsOwvqLaNEW3gNKiHlaeg6VffXrb_7qLLN2G8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/products/find/{{Prdct_id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"find",
+						"{{Prdct_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for Delete api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products/{{Prdct_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"{{Prdct_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 500ms for orders api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"let jsonData = pm.response.json()\r",
+							"\r",
+							"pm.globals.set(\"order_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"62d6ddbcf69db84399c7a6f2\",\r\n    \"products\":[\r\n       { \"productId\" :\"2sdsd\", \"quantity\":1},\r\n       { \"productId\" :\"2sdfdf\", \"quantity\":3}\r\n    ],\r\n    \"amount\":100,\r\n    \"address\":\"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/orders",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response time is less than 500ms for Delete Order api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"62d6ddbcf69db84399c7a6f2\",\r\n    \"products\":[\r\n       { \"productId\" :\"2sdsd\", \"quantity\":1},\r\n       { \"productId\" :\"2sdfdf\", \"quantity\":3}\r\n    ],\r\n    \"amount\":100,\r\n    \"address\":\"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/orders/{{order_id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Income",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for Income api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/orders/income",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"income"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bad request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms for Income api\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/orderd/income",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"orderd",
+						"income"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/users/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://cpsc2650project.herokuapp.com"
+		}
+	]
+}

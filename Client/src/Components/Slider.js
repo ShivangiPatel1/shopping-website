@@ -10,7 +10,7 @@ const Container = styled.div`
     width:100%;
     height:100vh;
     display: flex;
-    background-color: #dfd2eb;
+    background-color: #CCCFBC;
     position: relative;
     overflow: hidden;
     ${mobile({display:"none"})}
@@ -55,6 +55,7 @@ const ImgContainer = styled.div`
 `
 
 const Image = styled.img`
+margin:10%;
     height: 80%;
     position: relative;
     left:100px;
@@ -115,7 +116,6 @@ const Slider = () => {
                         <InfoContainer> 
                             <Title>{items.title}</Title>
                             <Desc>{items.desc}</Desc>
-                            <Button>Shop Now</Button>
                         </InfoContainer>
                     </Slide>
             ))}
