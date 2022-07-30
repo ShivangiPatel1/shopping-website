@@ -52,8 +52,8 @@ const Register = () => {
                 <Input placeholder="name"/>
                 <Input placeholder="Last name"/>
                 <Input placeholder="User name"/>
-                <Input placeholder="Password"/>
-                <Input placeholder="Confirm password"/>
+                <Input placeholder="Password" type="password"/>
+                <Input placeholder="Confirm password" type="password"/>
                 <Aggrement>By creating a password, you are consent to the privacy policy</Aggrement>
                 <Button>Create</Button>
             </Form>
